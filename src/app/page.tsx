@@ -1,19 +1,14 @@
-// app/page.tsx
 "use client";
 
 import { useState, useEffect } from "react";
 import emailjs from "@emailjs/browser";
 import Image from "next/image";
-import { FaGithub } from 'react-icons/fa';
-
-const scaleFactor = 1 / 20;
+import { FaGithub, FaEnvelope, FaTimes } from "react-icons/fa";
 
 export default function Home() {
-  // UI state
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [contrast, setContrast] = useState(false);
 
-  // init EmailJS
   useEffect(() => {
     emailjs.init(process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!);
   }, []);
@@ -67,7 +62,7 @@ export default function Home() {
           <ul className="nav__link--list">
             <li className="nav__link" onClick={toggleModal}>
               <a className="nav__link--anchor link__hover-effect link__hover-effect--black">
-                // about
+                about
               </a>
             </li>
             <li className="nav__link">
@@ -75,12 +70,12 @@ export default function Home() {
                 href="#projects"
                 className="nav__link--anchor link__hover-effect link__hover-effect--black"
               >
-                // projects
+                projects
               </a>
             </li>
             <li className="nav__link" onClick={toggleModal}>
               <a className="nav__link--anchor link__hover-effect link__hover-effect--black">
-                // contact
+                contact
               </a>
             </li>
             <li className="nav__link" onClick={toggleContrast}>
@@ -108,9 +103,6 @@ export default function Home() {
               .
             </p>
             <div className="social__list">
-              <a href="#" className="social__tag click">
-                {/* inline SVG… */}
-              </a>
               <a
                 href="https://github.com/austinst0ller"
                 target="_blank"
@@ -118,16 +110,13 @@ export default function Home() {
               >
                 <FaGithub size={24} />
               </a>
-              <a href="#" className="social__tag click">
-                <i className="far fa-file"></i>
-              </a>
             </div>
           </div>
         </header>
 
         {/* MAIL BTN */}
         <button className="mail__btn click" onClick={toggleModal}>
-          <i className="fas fa-envelope"></i>
+          <FaEnvelope size={24} />
         </button>
 
         {/* SCROLL DOWN */}
@@ -145,20 +134,25 @@ export default function Home() {
               Autodidactic Software Engineer & Lifelong Learner
             </h4>
             <p className="modal__para">
-              I'm a self-taught software engineer passionate about building innovative 
-              applications. I thrive on challenges and am always eager to learn new technologies. 
-              My journey began with C++ and Java, and today I specialize in Next.js and TypeScript.
-              <br/>
-              Looking ahead, I'm excited to explore emerging domains like large language models, 
-              AI, security, and system design.
+              I&apos;m a self-taught software engineer passionate about building
+              innovative applications. I thrive on challenges and am always
+              eager to learn new technologies. My journey began with C++ and
+              Java, and today I specialize in Next.js and TypeScript.
+              <br />
+              Looking ahead, I&apos;m excited to explore emerging domains like
+              large language models, AI, security, and system design.
             </p>
             {/* Languages grid… */}
           </div>
           <div className="modal__half modal__contact">
-            <i
-              className="fas fa-times modal__exit click"
+            <FaTimes
+              className="modal__exit click"
+              size={28}
+              color="#fff"
+              role="button"
+              aria-label="Close modal"
               onClick={toggleModal}
-            ></i>
+            />
             <h3 className="modal__title modal__title--contact">
               Let&apos;s Connect!
             </h3>
@@ -272,7 +266,7 @@ export default function Home() {
               <h2 className="project__title">Netflix Clone</h2>
               <p className="project__description">
                 A responsive streaming-service UI built with Next.js and
-                TypeScript that replicates Netflix’s core experience—browse
+                TypeScript that replicates Netflix&apos;s core experience—browse
                 trending shows, view details, and curate your own watchlist.
                 Content is fetched live from The Movie Database API.
               </p>
