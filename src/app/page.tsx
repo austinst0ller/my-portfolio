@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import emailjs from "@emailjs/browser";
 import Image from "next/image";
-import { FaGithub, FaEnvelope, FaTimes } from "react-icons/fa";
+import { FaGithub, FaEnvelope, FaTimes, FaAdjust } from "react-icons/fa";
 
 export default function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -12,6 +12,11 @@ export default function Home() {
   useEffect(() => {
     emailjs.init(process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!);
   }, []);
+
+  // dark theme
+  useEffect(() => {
+    document.documentElement.classList.toggle("dark-theme", contrast);
+  }, [contrast]);
 
   // modal toggles
   const toggleModal = () => setIsModalOpen((o) => !o);
@@ -32,7 +37,8 @@ export default function Home() {
       .sendForm(
         process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
         process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
-        form
+        form,
+        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
       )
       .then(() => {
         loading.classList.remove("modal__overlay--visible");
@@ -48,16 +54,20 @@ export default function Home() {
 
   return (
     <>
-      <section
+      {/* <section
         id="landing-page"
         className={`${contrast ? "dark-theme" : ""} ${
           isModalOpen ? "modal__open" : ""
         }`}
+      > */}
+      <section
+        id="landing-page"
+        className={isModalOpen ? "modal__open" : ""}
       >
         {/* NAV */}
         <nav>
           <figure>
-            <Image src="/logo_black.png" alt="logo" width={50} height={50} />
+            <Image src="/logo_black.png" alt="logo" width={80} height={50} />
           </figure>
           <ul className="nav__link--list">
             <li className="nav__link" onClick={toggleModal}>
@@ -80,7 +90,7 @@ export default function Home() {
             </li>
             <li className="nav__link" onClick={toggleContrast}>
               <a className="nav__link--anchor link__hover-effect--black">
-                <i className="fas fa-adjust"></i>
+                <FaAdjust size={20} />
               </a>
             </li>
           </ul>
